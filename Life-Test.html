@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeGuard — Life Insurance Protection</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        ghost: {
+                            bg: '#0d0e12',
+                            card: '#15171e',
+                            cardHover: '#1c1f28',
+                            border: '#262933',
+                            pink: '#ec4899',
+                            purple: '#8b5cf6',
+                            green: '#10b981',
+                            muted: '#9ca3af',
+                            darkMuted: '#4b5563'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for sleek SVG icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0d0e12;
+            color: #f3f4f6;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0e12;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262933;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #374151;
+        }
+
+        /* Ambient Glow effects */
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(236,72,153,0.12) 0%, rgba(139,92,246,0.08) 50%, rgba(0,0,0,0) 70%);
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .card-border {
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        /* Smooth tab transition */
+        .tab-btn {
+            transition: all 0.2s ease;
+        }
+
+        /* Range Slider Customization */
+        input[type=range] {
+            -webkit-appearance: none;
+            background: #262933;
+            height: 6px;
+            border-radius: 3px;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #ec4899;
+            cursor: pointer;
+            box-shadow: 0 0 12px rgba(236, 72, 153, 0.6);
+        }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between">
+
+    <!-- Ambient background effect -->
+    <div class="ambient-glow"></div>
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-ghost-bg/80 border-b border-white/5 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center space-x-3 text-xl font-bold tracking-tight">
+                <div class="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center">
+                    <div class="w-3 h-3 bg-white rounded-full"></div>
+                </div>
+                <span class="text-white font-extrabold text-2xl tracking-tight">LifeGuard</span>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm text-ghost-muted font-medium">
+                <a href="#features" class="hover:text-white transition-colors">Benefits</a>
+                <a href="#demo" class="hover:text-white transition-colors">Coverage Overview</a>
+                <a href="#calculator" class="hover:text-white transition-colors">Premium Calculator</a>
+                <a href="#pricing" class="hover:text-white transition-colors">Insurance Plans</a>
+                <a href="#resources" class="hover:text-white transition-colors">Support</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-4">
+                <a href="#demo" class="text-sm font-medium text-ghost-muted hover:text-white transition-colors hidden sm:block">My policy</a>
+                <a href="#pricing" class="bg-white text-black hover:bg-gray-200 text-sm font-semibold px-4 py-2 rounded-lg transition-all duration-200 shadow-lg shadow-white/5">
+                    Talk to an advisor
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative z-10 pt-16 pb-12 px-6 max-w-7xl mx-auto text-center">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-ghost-pink mb-6">
+            <span class="flex h-2 w-2 rounded-full bg-ghost-pink animate-pulse"></span>
+            Life protection made simple &bull; Plan with confidence
+        </div>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">
+            Protect every chapter of life with <span class="text-transparent bg-clip-text bg-gradient-to-r from-ghost-pink via-purple-400 to-ghost-purple">confidence</span>.
+        </h1>
+
+        <p class="mt-6 text-lg md:text-xl text-ghost-muted max-w-2xl mx-auto font-normal leading-relaxed">
+            Choose life insurance that helps protect your loved ones with flexible premiums, meaningful coverage, and care for the future.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#demo" class="w-full sm:w-auto bg-ghost-pink hover:bg-pink-600 text-white font-semibold px-6 py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-ghost-pink/25 flex items-center justify-center gap-2">
+                <span>Explore protection options</span>
+                <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+            <a href="#calculator" class="w-full sm:w-auto bg-ghost-card hover:bg-ghost-cardHover text-white border border-white/10 font-medium px-6 py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-calculator text-ghost-purple"></i>
+                <span>Estimate your premium</span>
+            </a>
+        </div>
+
+        <!-- Metric highlights pill -->
+        <div class="mt-10 inline-flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs sm:text-sm text-ghost-muted border-t border-white/5 pt-6">
+            <div><strong class="text-white font-semibold">Flexible</strong> premium options</div>
+            <div class="hidden sm:block">&bull;</div>
+            <div><strong class="text-white font-semibold">Up to 99</strong> years of protection</div>
+            <div class="hidden sm:block">&bull;</div>
+            <div><strong class="text-white font-semibold">24/7</strong> claims assistance</div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD DISPLAY SECTION (Exact Ghost Layout replica) -->
+    <section id="demo" class="relative z-10 py-8 px-4 sm:px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-6">
+            <span class="text-xs uppercase tracking-widest text-ghost-pink font-semibold">Your Protection Snapshot</span>
+            <h2 class="text-2xl sm:text-3xl font-bold text-white mt-1">Life Insurance Coverage Overview</h2>
+            <p class="text-sm text-ghost-muted mt-1">A clear view of protection, premium payment, and policy benefits.</p>
+        </div>
+
+        <!-- Ghost Mockup Container -->
+        <div class="bg-[#101115] rounded-2xl border border-white/10 shadow-2xl overflow-hidden text-sm">
+            
+            <!-- Dashboard Main Area -->
+            <div class="p-4 sm:p-8">
+                
+                <!-- Dashboard Top Bar Header -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-white tracking-tight">Policy overview</h3>
+                    </div>
+
+                    <!-- Date Filter Tabs -->
+                    <div class="flex items-center space-x-1 bg-ghost-card p-1 rounded-lg border border-white/5 text-xs">
+                        <button onclick="setTimeline('30d')" id="btn-30d" class="tab-btn px-3 py-1.5 rounded-md text-white font-medium bg-white/10">Essential</button>
+                        <button onclick="setTimeline('90d')" id="btn-90d" class="tab-btn px-3 py-1.5 rounded-md text-ghost-muted hover:text-white">Complete</button>
+                        <button onclick="setTimeline('1y')" id="btn-1y" class="tab-btn px-3 py-1.5 rounded-md text-ghost-muted hover:text-white">Legacy</button>
+                    </div>
+                </div>
+
+                <!-- Top Key Metrics 3-Column Bar -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                    <!-- Total Members -->
+                    <div class="bg-ghost-card p-4 rounded-xl border border-white/5">
+                        <div class="text-ghost-muted text-xs font-medium">Sum assured</div>
+                        <div class="flex items-baseline space-x-2 mt-1">
+                            <span id="metric-total" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">฿1,000,000</span>
+                            <span id="badge-total" class="text-xs font-semibold text-ghost-green bg-ghost-green/10 px-1.5 py-0.5 rounded">Recommended</span>
+                        </div>
+                    </div>
+
+                    <!-- Paid Members -->
+                    <div class="bg-ghost-card p-4 rounded-xl border border-white/5">
+                        <div class="text-ghost-muted text-xs font-medium">Annual premium</div>
+                        <div class="flex items-baseline space-x-2 mt-1">
+                            <span id="metric-paid" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">฿18,500</span>
+                            <span id="badge-paid" class="text-xs font-semibold text-ghost-green bg-ghost-green/10 px-1.5 py-0.5 rounded">Flexible</span>
+                        </div>
+                    </div>
+
+                    <!-- Free Members -->
+                    <div class="bg-ghost-card p-4 rounded-xl border border-white/5">
+                        <div class="text-ghost-muted text-xs font-medium">Protection period</div>
+                        <div class="flex items-baseline space-x-2 mt-1">
+                            <span id="metric-free" class="text-2xl sm:text-3xl font-bold text-white tracking-tight">30 years</span>
+                            <span id="badge-free" class="text-xs font-semibold text-ghost-green bg-ghost-green/10 px-1.5 py-0.5 rounded">To age 65</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MAIN TIME-SERIES CHART CARD -->
+                <div class="bg-ghost-card p-4 sm:p-6 rounded-xl border border-white/5 mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center space-x-2 text-xs font-medium text-ghost-muted cursor-pointer hover:text-white transition-colors">
+                            <span>Coverage value over time</span>
+                            <i class="fa-solid fa-chevron-down text-[10px]"></i>
+                        </div>
+                        <div class="text-xs text-ghost-muted font-mono" id="chart-date-range">Age 35 – Age 65</div>
+                    </div>
+
+                    <!-- Interactive Canvas Area -->
+                    <div class="relative w-full h-64 sm:h-72">
+                        <canvas id="ghostChart" class="w-full h-full cursor-crosshair"></canvas>
+                        
+                        <!-- Ghost Style Tooltip -->
+                        <div id="chartTooltip" class="absolute hidden pointer-events-none transition-all duration-75 bg-[#0d0e12]/90 backdrop-blur border border-white/10 px-3 py-1.5 rounded-lg shadow-xl text-xs">
+                            <div id="tooltipDate" class="text-ghost-muted text-[11px]">Policy year</div>
+                            <div class="flex items-center space-x-2 mt-0.5 font-semibold text-white">
+                                <span class="w-2 h-2 rounded-full bg-ghost-pink"></span>
+                                <span id="tooltipVal">8,732</span>
+                                <span class="text-ghost-muted font-normal text-[11px]">coverage (THB)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECOND ROW 3-COLUMN METRICS (MRR, Subscriptions, Mix) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                    
+                    <!-- MRR Card -->
+                    <div class="bg-ghost-card p-5 rounded-xl border border-white/5 flex flex-col justify-between">
+                        <div>
+                            <div class="text-ghost-muted text-xs font-medium">Premium payment</div>
+                            <div class="flex items-baseline space-x-2 mt-1">
+                                <span class="text-2xl font-bold text-white tracking-tight">฿18,500 / year</span>
+                                <span class="text-xs font-semibold text-ghost-green">↑ +3.8%</span>
+                            </div>
+                        </div>
+                        <!-- Mini sparkline mockup -->
+                        <div class="h-10 mt-4 flex items-end space-x-1">
+                            <div class="w-full bg-ghost-purple/20 rounded-t h-1/3"></div>
+                            <div class="w-full bg-ghost-purple/30 rounded-t h-2/3"></div>
+                            <div class="w-full bg-ghost-purple/40 rounded-t h-1/2"></div>
+                            <div class="w-full bg-ghost-purple/60 rounded-t h-3/4"></div>
+                            <div class="w-full bg-ghost-purple rounded-t h-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- Paid Subscriptions Bar distribution -->
+                    <div class="bg-ghost-card p-5 rounded-xl border border-white/5">
+                        <div class="text-ghost-muted text-xs font-medium mb-2">Protection benefits</div>
+                        <div class="flex items-center space-x-4 text-xs mb-3">
+                            <span class="flex items-center gap-1.5 text-white">
+                                <span class="w-2 h-2 rounded-full bg-ghost-purple"></span> Life cover
+                            </span>
+                            <span class="flex items-center gap-1.5 text-ghost-muted">
+                                <span class="w-2 h-2 rounded-full bg-ghost-pink"></span> Critical illness
+                            </span>
+                        </div>
+                        <!-- Micro vertical bars pattern -->
+                        <div class="h-12 flex items-end justify-between gap-1">
+                            <div class="w-1.5 bg-ghost-purple h-8 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-11 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-pink h-4 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-9 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-12 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-7 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-pink h-3 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-10 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-8 rounded-sm"></div>
+                            <div class="w-1.5 bg-ghost-purple h-12 rounded-sm"></div>
+                        </div>
+                    </div>
+
+                    <!-- Paid Mix Cadence -->
+                    <div class="bg-ghost-card p-5 rounded-xl border border-white/5">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-ghost-muted text-xs font-medium">Policy structure</span>
+                            <span class="text-ghost-muted text-xs flex items-center gap-1">Payment <i class="fa-solid fa-chevron-down text-[9px]"></i></span>
+                        </div>
+                        <div class="flex items-center space-x-4 text-xs mb-4">
+                            <span class="flex items-center gap-1.5 text-white">
+                                <span class="w-2 h-2 rounded-full bg-ghost-purple"></span> Protection
+                            </span>
+                            <span class="flex items-center gap-1.5 text-ghost-muted">
+                                <span class="w-2 h-2 rounded-full bg-ghost-pink"></span> Savings
+                            </span>
+                        </div>
+                        <!-- Cadence Progress Bar -->
+                        <div class="w-full bg-ghost-pink h-2 rounded-full overflow-hidden flex">
+                            <div class="bg-ghost-purple h-full" style="width: 82%;"></div>
+                        </div>
+                        <div class="flex justify-between text-[11px] text-ghost-muted mt-2">
+                            <span>82% Protection</span>
+                            <span>18% Savings</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- THIRD ROW: Engagement & Recent Posts -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    
+                    <!-- Engagement card -->
+                    <div class="bg-ghost-card p-5 rounded-xl border border-white/5 flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-ghost-muted text-xs font-medium">Engagement</span>
+                            <span class="text-ghost-muted text-xs flex items-center gap-1">All members <i class="fa-solid fa-chevron-down text-[9px]"></i></span>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-2">
+                            <div>
+                                <div class="text-xl font-bold text-white">68%</div>
+                                <div class="text-[11px] text-ghost-muted mt-0.5">Engaged in last <br><strong class="text-gray-300">30 days</strong></div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-bold text-white">36%</div>
+                                <div class="text-[11px] text-ghost-muted mt-0.5">Engaged in last <br><strong class="text-gray-300">7 days</strong></div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-bold text-white">9,863</div>
+                                <div class="text-[11px] text-ghost-muted mt-0.5">Newsletter <br><strong class="text-gray-300">subscribers</strong></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Posts Table mockup -->
+                    <div class="bg-ghost-card p-5 rounded-xl border border-white/5 lg:col-span-2">
+                        <div class="flex items-center space-x-6 border-b border-white/5 pb-3 text-xs mb-3">
+                            <button class="text-white font-medium border-b-2 border-white pb-1 -mb-[13px]">Recent posts</button>
+                            <button class="text-ghost-muted font-medium hover:text-white pb-1">Member activity</button>
+                        </div>
+
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between text-xs py-1 border-b border-white/5 pb-2">
+                                <div class="truncate max-w-[60%]">
+                                    <div class="font-medium text-white truncate">Subscription business metrics explained for publishers</div>
+                                    <div class="text-[10px] text-ghost-muted mt-0.5">By Alex Chen &bull; Published 2 days ago</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-mono text-white font-medium">12,984 sends</div>
+                                    <div class="text-[11px] text-ghost-green font-medium">76% open rate</div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between text-xs py-1">
+                                <div class="truncate max-w-[60%]">
+                                    <div class="font-medium text-white truncate">Building an independent creative brand in 2026</div>
+                                    <div class="text-[10px] text-ghost-muted mt-0.5">By Sarah Jenkins &bull; Published 5 days ago</div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="font-mono text-white font-medium">11,200 sends</div>
+                                    <div class="text-[11px] text-ghost-green font-medium">81% open rate</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-white">Protection designed around the people you love</h2>
+            <p class="text-ghost-muted mt-3">Build a life insurance plan around your goals, with benefits that support every stage of life.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Feature 1 -->
+            <div class="bg-ghost-card p-8 rounded-2xl border border-white/5 hover:border-ghost-pink/30 transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-ghost-pink/10 border border-ghost-pink/20 flex items-center justify-center text-ghost-pink mb-6 text-xl">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Meaningful life cover</h3>
+                <p class="text-ghost-muted text-sm leading-relaxed">
+                    Deliver posts directly to your audience’s inbox. Design beautiful emails without relying on third-party newsletter tools.
+                </p>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="bg-ghost-card p-8 rounded-2xl border border-white/5 hover:border-ghost-purple/30 transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-ghost-purple/10 border border-ghost-purple/20 flex items-center justify-center text-ghost-purple mb-6 text-xl">
+                    <i class="fa-solid fa-credit-card"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Flexible premium payments</h3>
+                <p class="text-ghost-muted text-sm leading-relaxed">
+                    Transform readers into paying members using direct Stripe integration. You keep 100% of the revenue you make.
+                </p>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="bg-ghost-card p-8 rounded-2xl border border-white/5 hover:border-ghost-green/30 transition-all duration-300">
+                <div class="w-12 h-12 rounded-xl bg-ghost-green/10 border border-ghost-green/20 flex items-center justify-center text-ghost-green mb-6 text-xl">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Care when it matters</h3>
+                <p class="text-ghost-muted text-sm leading-relaxed">
+                    Built on modern Node.js architecture. Ghost loads up to 19x faster than WordPress, keeping your site SEO-optimized.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE CREATOR CALCULATOR -->
+    <section id="calculator" class="py-20 px-6 max-w-5xl mx-auto">
+        <div class="bg-gradient-to-b from-ghost-card to-[#0d0e12] p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden">
+            <div class="text-center max-w-xl mx-auto mb-10">
+                <span class="text-xs uppercase tracking-widest text-ghost-purple font-semibold">Life Insurance Calculator</span>
+                <h2 class="text-3xl font-bold text-white mt-1">Estimate your annual premium</h2>
+                <p class="text-ghost-muted text-sm mt-2">Adjust your age, desired sum assured, and protection period for an illustrative estimate.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                <!-- Controls -->
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between text-sm font-medium mb-2">
+                            <span class="text-ghost-muted">Age at entry</span>
+                            <span id="sub-count-text" class="text-white font-bold">35 years</span>
+                        </div>
+                        <input type="range" id="sub-slider" min="20" max="60" step="1" value="35" class="w-full">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-medium mb-2">
+                            <span class="text-ghost-muted">Sum assured</span>
+                            <span id="conv-text" class="text-white font-bold">฿1,000,000</span>
+                        </div>
+                        <input type="range" id="conv-slider" min="500000" max="5000000" step="500000" value="1000000" class="w-full">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-sm font-medium mb-2">
+                            <span class="text-ghost-muted">Protection period</span>
+                            <span id="price-text" class="text-white font-bold">30 years</span>
+                        </div>
+                        <input type="range" id="price-slider" min="10" max="40" step="5" value="30" class="w-full">
+                    </div>
+                </div>
+
+                <!-- Output Card -->
+                <div class="bg-[#101115] p-8 rounded-2xl border border-white/10 text-center flex flex-col justify-center">
+                    <span class="text-xs font-semibold uppercase text-ghost-muted tracking-wider">Estimated annual premium</span>
+                    <div id="calc-result" class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-ghost-pink to-ghost-purple my-3">
+                        ฿18,500
+                    </div>
+                    <span class="text-xs text-ghost-muted">per year — illustration only; terms and underwriting apply</span>
+
+                    <div class="mt-6 pt-6 border-t border-white/5 text-xs text-ghost-darkMuted flex justify-between">
+                        <span>Payment: <strong>Annual</strong></span>
+                        <span>Coverage: <strong>Life protection</strong></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING SECTION -->
+    <section id="pricing" class="py-20 px-6 max-w-7xl mx-auto border-t border-white/5">
+        <div class="text-center max-w-xl mx-auto mb-16">
+            <h2 class="text-3xl font-bold text-white">Choose the protection that fits your life</h2>
+            <p class="text-ghost-muted mt-2">Illustrative plans for different life stages. Final premiums depend on underwriting and policy terms.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Starter -->
+            <div class="bg-ghost-card p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Essential Life</h3>
+                    <p class="text-ghost-muted text-xs mt-1">Straightforward protection for your family</p>
+                    <div class="my-6">
+                        <span class="text-4xl font-extrabold text-white">฿8,900</span>
+                        <span class="text-ghost-muted text-xs">/year*</span>
+                    </div>
+                    <ul class="space-y-3 text-xs text-ghost-muted mb-8">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Sum assured up to ฿500,000</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Protection up to 20 years</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Choose your beneficiaries</li>
+                    </ul>
+                </div>
+                <a href="#calculator" class="w-full py-3 rounded-xl border border-white/10 text-white font-medium text-center hover:bg-white/5 transition-colors">Calculate premium</a>
+            </div>
+
+            <!-- Creator (Featured) -->
+            <div class="bg-ghost-card p-8 rounded-2xl border-2 border-ghost-pink relative flex flex-col justify-between shadow-2xl shadow-ghost-pink/10">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-ghost-pink text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    Most Popular
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold text-white">Complete Life</h3>
+                    <p class="text-ghost-muted text-xs mt-1">Broader protection for growing responsibilities</p>
+                    <div class="my-6">
+                        <span class="text-4xl font-extrabold text-white">฿18,500</span>
+                        <span class="text-ghost-muted text-xs">/year*</span>
+                    </div>
+                    <ul class="space-y-3 text-xs text-ghost-muted mb-8">
+                        <li class="flex items-center gap-2 text-white"><i class="fa-solid fa-check text-ghost-pink"></i> Sum assured up to ฿1,000,000</li>
+                        <li class="flex items-center gap-2 text-white"><i class="fa-solid fa-check text-ghost-pink"></i> Protection up to 30 years</li>
+                        <li class="flex items-center gap-2 text-white"><i class="fa-solid fa-check text-ghost-pink"></i> Critical illness option</li>
+                        <li class="flex items-center gap-2 text-white"><i class="fa-solid fa-check text-ghost-pink"></i> Annual premium payment</li>
+                    </ul>
+                </div>
+                <a href="#calculator" class="w-full py-3 rounded-xl bg-ghost-pink text-white font-semibold text-center hover:bg-pink-600 transition-colors shadow-lg shadow-ghost-pink/20">Calculate premium</a>
+            </div>
+
+            <!-- Team -->
+            <div class="bg-ghost-card p-8 rounded-2xl border border-white/5 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-white">Legacy Life</h3>
+                    <p class="text-ghost-muted text-xs mt-1">Long-term confidence for life's biggest goals</p>
+                    <div class="my-6">
+                        <span class="text-4xl font-extrabold text-white">฿32,000</span>
+                        <span class="text-ghost-muted text-xs">/year*</span>
+                    </div>
+                    <ul class="space-y-3 text-xs text-ghost-muted mb-8">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Sum assured up to ฿5,000,000</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Protection up to age 99</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Optional accident benefit</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-ghost-green"></i> Dedicated claims support</li>
+                    </ul>
+                </div>
+                <a href="#calculator" class="w-full py-3 rounded-xl border border-white/10 text-white font-medium text-center hover:bg-white/5 transition-colors">Calculate premium</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 py-12 px-6 bg-[#090a0d] text-ghost-muted text-xs">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-6 h-6 rounded-full border border-white flex items-center justify-center">
+                    <div class="w-2 h-2 bg-white rounded-full"></div>
+                </div>
+                <span class="text-white font-bold text-base">LifeGuard</span>
+                <span class="text-ghost-darkMuted">&copy; 2026 LifeGuard. Protection for life's journey.</span>
+            </div>
+
+            <div class="flex space-x-6">
+                <a href="#" class="hover:text-white transition-colors">Policy details</a>
+                <a href="#" class="hover:text-white transition-colors">Claims support</a>
+                <a href="#" class="hover:text-white transition-colors">Contact us</a>
+                <a href="#" class="hover:text-white transition-colors">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Data sets for timeline toggling
+        const timelineData = {
+            '30d': {
+                range: '19 Mar, 2022 – 19 Apr, 2022',
+                total: '13,041',
+                paid: '3,207',
+                free: '9,834',
+                totalBadge: '↑ 4%',
+                points: [5200, 5400, 5900, 6100, 6800, 6500, 7100, 7900, 8732, 8200, 7800, 8400, 9200, 8800, 9834]
+            },
+            '90d': {
+                range: '19 Jan, 2022 – 19 Apr, 2022',
+                total: '15,820',
+                paid: '4,110',
+                free: '11,710',
+                totalBadge: '↑ 12%',
+                points: [3100, 3600, 4200, 4900, 5800, 6700, 7800, 8900, 9500, 10200, 11100, 11710]
+            },
+            '1y': {
+                range: '19 Apr, 2021 – 19 Apr, 2022',
+                total: '24,500',
+                paid: '6,400',
+                free: '18,100',
+                totalBadge: '↑ 48%',
+                points: [1200, 2400, 3800, 5500, 7200, 9100, 11500, 13800, 15200, 16900, 17500, 18100]
+            }
+        };
+
+        let currentTimeline = '30d';
+
+        // Initialize Line Chart on Canvas
+        const canvas = document.getElementById('ghostChart');
+        const ctx = canvas.getContext('2d');
+        const tooltip = document.getElementById('chartTooltip');
+        const tooltipDate = document.getElementById('tooltipDate');
+        const tooltipVal = document.getElementById('tooltipVal');
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            drawChart();
+        }
+
+        function drawChart(activeX = null) {
+            const rect = canvas.getBoundingClientRect();
+            const w = rect.width;
+            const h = rect.height;
+            const points = timelineData[currentTimeline].points;
+
+            ctx.clearRect(0, 0, w, h);
+
+            const padding = 20;
+            const graphWidth = w - padding * 2;
+            const graphHeight = h - padding * 2;
+
+            const minVal = Math.min(...points) * 0.9;
+            const maxVal = Math.max(...points) * 1.05;
+
+            // Map points to X, Y coordinates
+            const coords = points.map((val, idx) => {
+                const x = padding + (idx / (points.length - 1)) * graphWidth;
+                const y = h - padding - ((val - minVal) / (maxVal - minVal)) * graphHeight;
+                return { x, y, val };
+            });
+
+            // Gradient Fill under curve
+            const fillGradient = ctx.createLinearGradient(0, 0, 0, h);
+            fillGradient.addColorStop(0, 'rgba(236, 72, 153, 0.25)');
+            fillGradient.addColorStop(1, 'rgba(236, 72, 153, 0.0)');
+
+            // Draw Curved Path
+            ctx.beginPath();
+            ctx.moveTo(coords[0].x, coords[0].y);
+            for (let i = 0; i < coords.length - 1; i++) {
+                const xc = (coords[i].x + coords[i + 1].x) / 2;
+                const yc = (coords[i].y + coords[i + 1].y) / 2;
+                ctx.quadraticCurveTo(coords[i].x, coords[i].y, xc, yc);
+            }
+            ctx.lineTo(coords[coords.length - 1].x, coords[coords.length - 1].y);
+
+            // Save line path for stroke
+            const linePath = new Path2D(ctx.currentPath);
+
+            // Complete fill area path
+            ctx.lineTo(coords[coords.length - 1].x, h - padding);
+            ctx.lineTo(coords[0].x, h - padding);
+            ctx.closePath();
+            ctx.fillStyle = fillGradient;
+            ctx.fill();
+
+            // Stroke line
+            ctx.strokeStyle = '#ec4899';
+            ctx.lineWidth = 3;
+            ctx.shadowColor = '#ec4899';
+            ctx.shadowBlur = 10;
+            ctx.stroke(linePath);
+            ctx.shadowBlur = 0; // reset glow
+
+            // Hover interactions
+            if (activeX !== null) {
+                // Find closest point
+                let closest = coords[0];
+                let minDiff = Math.abs(activeX - coords[0].x);
+                coords.forEach(pt => {
+                    const diff = Math.abs(activeX - pt.x);
+                    if (diff < minDiff) {
+                        minDiff = diff;
+                        closest = pt;
+                    }
+                });
+
+                // Vertical tracer line
+                ctx.beginPath();
+                ctx.moveTo(closest.x, padding);
+                ctx.lineTo(closest.x, h - padding);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.3)';
+                ctx.setLineDash([4, 4]);
+                ctx.lineWidth = 1;
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Glowing point dot
+                ctx.beginPath();
+                ctx.arc(closest.x, closest.y, 6, 0, Math.PI * 2);
+                ctx.fillStyle = '#ec4899';
+                ctx.fill();
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Position HTML Tooltip
+                tooltip.style.display = 'block';
+                tooltip.style.left = `${closest.x}px`;
+                tooltip.style.top = `${closest.y - 50}px`;
+                tooltipVal.innerText = closest.val.toLocaleString();
+            } else {
+                tooltip.style.display = 'none';
+            }
+        }
+
+        // Canvas Mouse Events
+        canvas.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            drawChart(x);
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            drawChart(null);
+        });
+
+        // Timeline toggle handler
+        function setTimeline(period) {
+            currentTimeline = period;
+            const data = timelineData[period];
+
+            document.getElementById('metric-total').innerText = data.total;
+            document.getElementById('metric-paid').innerText = data.paid;
+            document.getElementById('metric-free').innerText = data.free;
+            document.getElementById('badge-total').innerText = data.totalBadge;
+            document.getElementById('chart-date-range').innerText = data.range;
+
+            // Button styling updates
+            ['30d', '90d', '1y'].forEach(p => {
+                const btn = document.getElementById(`btn-${p}`);
+                if (p === period) {
+                    btn.className = 'tab-btn px-3 py-1.5 rounded-md text-white font-medium bg-white/10';
+                } else {
+                    btn.className = 'tab-btn px-3 py-1.5 rounded-md text-ghost-muted hover:text-white';
+                }
+            });
+
+            drawChart();
+        }
+
+        // Life insurance premium calculator (illustrative only)
+        const subSlider = document.getElementById('sub-slider');
+        const convSlider = document.getElementById('conv-slider');
+        const priceSlider = document.getElementById('price-slider');
+
+        function updateCalculator() {
+            const age = parseInt(subSlider.value);
+            const sumAssured = parseInt(convSlider.value);
+            const protectionYears = parseInt(priceSlider.value);
+
+            document.getElementById('sub-count-text').innerText = `${age} years`;
+            document.getElementById('conv-text').innerText = `฿${sumAssured.toLocaleString()}`;
+            document.getElementById('price-text').innerText = `${protectionYears} years`;
+
+            const ageFactor = 0.012 + Math.max(age - 30, 0) * 0.0007;
+            const durationFactor = 0.75 + protectionYears / 100;
+            const annualPremium = Math.round(sumAssured * ageFactor * durationFactor / 100) * 100;
+            document.getElementById('calc-result').innerText = `฿${annualPremium.toLocaleString()}`;
+        }
+
+        subSlider.addEventListener('input', updateCalculator);
+        convSlider.addEventListener('input', updateCalculator);
+        priceSlider.addEventListener('input', updateCalculator);
+
+        // Window resize listener
+        window.addEventListener('resize', resizeCanvas);
+
+        // Window Load init
+        window.onload = function() {
+            resizeCanvas();
+            updateCalculator();
+        };
+    </script>
+</body>
+</html>
